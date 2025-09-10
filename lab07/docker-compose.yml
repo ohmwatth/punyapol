@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0  # Use MySQL version 8
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: p@123
+      MYSQL_DATABASE: customerdb  # Name of the database
+    ports:
+      - "3306:3306"  # Expose port 3306 for MySQL
+    volumes:
+      - mysql-data:/var/lib/mysql  # Persist data between container restarts
+    networks:
+      - lab07-network
+    restart: always
+
+networks:
+  lab07-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
